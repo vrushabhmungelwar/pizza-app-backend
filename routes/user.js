@@ -27,25 +27,28 @@ router.route("/register").post(async (request, response) => {
 });
 
 router.route("/signin").post(async (request, response) => {
+  let success = false;
   const { email, password } = request.body;
 
   const userFromDB = await getUserByEmail(email);
-
   if (!userFromDB) {
-    response.status(401).send({ message: "Invalid credentials1" });
+    success = false
+    response.status(401).send({success, message: "Invalid credentials1" });
     return;
   }
-
+ 
   const storedPassword = userFromDB.password;
 
   const isPasswordMatch = await bcrypt.compare(password, storedPassword);
 
   if (isPasswordMatch) {
     const token = jwt.sign({ id: userFromDB._id }, process.env.SECRET_KEY);
-    response.send({ message: "Successful login", token: token });
+    success = true;
+    response.send({ success, message: "Successful login", token: token });
     console.log(userFromDB);
   } else {
-    response.status(401).send({ message: "Invalid credentials" });
+    success = false
+    response.status(401).send({success, message: "Invalid credentials" });
   }
 });
 export const userRouter = router;
