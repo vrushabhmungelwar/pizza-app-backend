@@ -7,7 +7,7 @@ async function createUser(data) {
     .collection("user")
     .insertOne(data);
 }
-async function getUserByEmail({email}) {
+async function getUserByEmail(email) {
   return await client
     .db("Users")
     .collection("user")
