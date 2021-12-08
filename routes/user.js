@@ -6,6 +6,8 @@ import { createUser, getUserByEmail, genPassword } from "../helper.js";
 const router = express.Router(); ///////
 
 router.route("/register").post(async (request, response) => {
+  let success = false;
+
   const { email, password } = request.body;
 
   const userFromDB = await getUserByEmail(email);
@@ -13,17 +15,20 @@ router.route("/register").post(async (request, response) => {
   console.log(userFromDB);
 
   if (userFromDB) {
-    response.status(400).send({ message: "email already exists" });
+    success = false;
+    response.status(400).send({ success, message: "email already exists" });
     return;
   }
   if (password.length < 8) {
-    response.status(400).send({ message: "Password is not longer" });
+    success = false;
+    response.status(400).send({ success, message: "Password is not longer" });
     return;
+  } else {
+    success = true;
+    const hashedPassword = await genPassword(password);
+    const result = await createUser({ email, password: hashedPassword });
+    response.send({ success, result });
   }
-
-  const hashedPassword = await genPassword(password);
-  const result = await createUser({ email, password: hashedPassword });
-  response.send(result);
 });
 
 router.route("/signin").post(async (request, response) => {
@@ -32,11 +37,11 @@ router.route("/signin").post(async (request, response) => {
 
   const userFromDB = await getUserByEmail(email);
   if (!userFromDB) {
-    success = false
-    response.status(401).send({success, message: "Invalid credentials1" });
+    success = false;
+    response.status(401).send({ success, message: "Invalid credentials1" });
     return;
   }
- 
+
   const storedPassword = userFromDB.password;
 
   const isPasswordMatch = await bcrypt.compare(password, storedPassword);
@@ -47,8 +52,8 @@ router.route("/signin").post(async (request, response) => {
     response.send({ success, message: "Successful login", token: token });
     console.log(userFromDB);
   } else {
-    success = false
-    response.status(401).send({success, message: "Invalid credentials" });
+    success = false;
+    response.status(401).send({ success, message: "Invalid credentials" });
   }
 });
 export const userRouter = router;
