@@ -36,11 +36,11 @@ router.route("/signin").post(async (request, response) => {
   const { email, password } = request.body;
 
   const userFromDB = await getUserByEmail(email);
-  if (!userFromDB) {
-    success = false;
-    response.status(401).send({ success, message: "Invalid credentials1" });
-    return;
-  }
+  // if (!userFromDB) {
+  //   success = false;
+  //   response.status(401).send({ success, message: "Invalid credentials1" });
+  //   return;
+  // }
 
   const storedPassword = userFromDB.password;
 
