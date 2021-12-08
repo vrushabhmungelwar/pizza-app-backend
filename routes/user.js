@@ -35,7 +35,7 @@ router.route("/signin").post(async (request, response) => {
   let success = false;
   const { email, password } = request.body;
 
-  const userFromDB = await getUserByEmail({email});
+  const userFromDB = await getUserByEmail(email);
   if (!userFromDB) {
     success = false;
     response.status(401).send({ success, message: "Invalid credentials1" });
@@ -57,8 +57,6 @@ router.route("/signin").post(async (request, response) => {
   }
 });
 
-
-
 // router.route("/signin").post(async (request, response) => {
 //   let success = false;
 //   const { email, password } = request.body;
@@ -67,25 +65,9 @@ router.route("/signin").post(async (request, response) => {
 //   let customer = user.g({email})
 //   if ()
 // } catch (error) {
-  
+
 // }
 
-
 // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export const userRouter = router;
