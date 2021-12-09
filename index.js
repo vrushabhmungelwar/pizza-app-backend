@@ -10,11 +10,14 @@ console.log(process.env);
 const app = express();
 const PORT = process.env.PORT;
 // app.use(cors());
+var corsOptions = {
+  origin: 'https://affectionate-murdock-39034f.netlify.app',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
-
-app.use(
-  cors({ origin: 'https://affectionate-murdock-39034f.netlify.app' })
-);
+// app.use(
+//   cors({ origin: 'https://affectionate-murdock-39034f.netlify.app' })
+// );
 app.use(express.json());
 
 const MONGO_URL = process.env.MONGO_URL;
@@ -26,7 +29,10 @@ async function createConnection() {
   return client;
 }
 export const client = await createConnection();
-app.get("/", (request, response) => {
+
+
+
+app.get("/", cors(corsOptions), (request, response) => {
   response.send("pizza khao, **😅");
 });
 
