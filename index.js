@@ -32,7 +32,7 @@ const PORT = process.env.PORT;
 // });
 
 app.use(
-  cors({ origin: 'https://wonderful-hodgkin-aa9a65.netlify.app' })
+  cors({ origin: 'https://affectionate-murdock-39034f.netlify.app' })
 );
 app.use(express.json());
 
