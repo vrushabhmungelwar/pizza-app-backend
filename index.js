@@ -10,7 +10,7 @@ console.log(process.env);
 
 const app = express();
 const PORT = process.env.PORT;
-app.use(cors());
+// app.use(cors());
 app.use(cors({origin: 'https://wonderful-hodgkin-aa9a65.netlify.app/userLogIn'}));
 app.use(express.json());
 
