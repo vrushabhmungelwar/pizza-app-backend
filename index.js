@@ -1,9 +1,8 @@
-import express from "express"; 
+import express from "express";
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import cors from "cors";
-import {userRouter} from "./routes/user.js"
-
+import { userRouter } from "./routes/user.js";
 
 dotenv.config();
 console.log(process.env);
@@ -11,7 +10,9 @@ console.log(process.env);
 const app = express();
 const PORT = process.env.PORT;
 // app.use(cors());
-app.use(cors({origin: 'https://wonderful-hodgkin-aa9a65.netlify.app'}));
+app.use(
+  cors({ origin: "https://wonderful-hodgkin-aa9a65.netlify.app/userLogIn" })
+);
 app.use(express.json());
 
 const MONGO_URL = process.env.MONGO_URL;
