@@ -11,29 +11,33 @@ const app = express();
 const PORT = process.env.PORT;
 // app.use(cors());
 
-// // Add headers before the routes are defined
-// app.use(function (req, res, next) {
 
-//   // Website you wish to allow to connect
-//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8888');
 
-//   // Request methods you wish to allow
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+// Add headers before the routes are defined
+app.use(function (req, res, next) {
 
-//   // Request headers you wish to allow
-//   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', 'https://affectionate-murdock-39034f.netlify.app');
 
-//   // Set to true if you need the website to include cookies in the requests sent
-//   // to the API (e.g. in case you use sessions)
-//   res.setHeader('Access-Control-Allow-Credentials', true);
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
-//   // Pass to next layer of middleware
-//   next();
-// });
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
-app.use(
-  cors({ origin: 'https://affectionate-murdock-39034f.netlify.app' })
-);
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  // Pass to next layer of middleware
+  next();
+});
+
+
+
+// app.use(
+//   cors({ origin: 'https://affectionate-murdock-39034f.netlify.app' })
+// );
 app.use(express.json());
 
 const MONGO_URL = process.env.MONGO_URL;
