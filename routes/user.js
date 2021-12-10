@@ -57,17 +57,5 @@ router.route("/signin").post(async (request, response) => {
   }
 });
 
-// router.route("/signin").post(async (request, response) => {
-//   let success = false;
-//   const { email, password } = request.body;
-
-// try {
-//   let customer = user.g({email})
-//   if ()
-// } catch (error) {
-
-// }
-
-// });
 
 export const userRouter = router;

@@ -2,16 +2,10 @@ import { client } from "./index.js";
 import bcrypt from "bcrypt";
 
 async function createUser(data) {
-  return await client
-    .db("Users")
-    .collection("user")
-    .insertOne(data);
+  return await client.db("Users").collection("user").insertOne(data);
 }
 async function getUserByEmail(email) {
-  return await client
-    .db("Users")
-    .collection("user")
-    .findOne({ email: email });
+  return await client.db("Users").collection("user").findOne({ email: email });
 }
 async function genPassword(password) {
   const NO_OF_ROUNDS = 10;
@@ -22,4 +16,12 @@ async function genPassword(password) {
   return hashedPassword;
 }
 
-export { createUser, getUserByEmail, genPassword };
+async function getPizza(filter) {
+  return await client
+    .db("pizza_data")
+    .collection("pizzalist")
+    .find(filter)
+    .toArray();
+}
+
+export { createUser, getUserByEmail, genPassword, getPizza };

@@ -3,6 +3,7 @@ import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import cors from "cors";
 import { userRouter } from "./routes/user.js";
+import { pizzalistRouter } from "./routes/pizzalist.js";
 
 dotenv.config();
 // console.log(process.env);
@@ -30,5 +31,7 @@ app.get("/", (request, response) => {
 });
 
 app.use("/user", userRouter);
+app.use("/pizzalist", pizzalistRouter);
+
 
 app.listen(PORT, () => console.log("App is started", PORT));
