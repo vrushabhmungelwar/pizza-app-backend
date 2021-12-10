@@ -7,6 +7,14 @@ async function createUser(data) {
 async function getUserByEmail(email) {
   return await client.db("Users").collection("user").findOne({ email: email });
 }
+
+async function createAdmin(data) {
+  return await client.db("Users").collection("admin").insertOne(data);
+}
+async function getAdminByEmail(email) {
+  return await client.db("Users").collection("admin").findOne({ email: email });
+}
+
 async function genPassword(password) {
   const NO_OF_ROUNDS = 10;
   const salt = await bcrypt.genSalt(NO_OF_ROUNDS);
@@ -24,4 +32,11 @@ async function getPizza(filter) {
     .toArray();
 }
 
-export { createUser, getUserByEmail, genPassword, getPizza };
+export {
+  createUser,
+  getUserByEmail,
+  genPassword,
+  getPizza,
+  createAdmin,
+  getAdminByEmail,
+};

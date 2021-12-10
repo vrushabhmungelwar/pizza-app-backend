@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { userRouter } from "./routes/user.js";
 import { pizzalistRouter } from "./routes/pizzalist.js";
+import { adminRouter } from "./routes/admin.js";
 
 dotenv.config();
 // console.log(process.env);
@@ -31,6 +32,8 @@ app.get("/", (request, response) => {
 });
 
 app.use("/user", userRouter);
+app.use("/admin", adminRouter);
+
 app.use("/pizzalist", pizzalistRouter);
 
 
