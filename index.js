@@ -9,9 +9,9 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT;
-// app.use(cors());
+app.use(cors());
 
-app.use(cors({ origin: "https://affectionate-murdock-39034f.netlify.app" }));
+// app.use(cors({ origin: "https://affectionate-murdock-39034f.netlify.app" }));
 
 app.use(express.json());
 
