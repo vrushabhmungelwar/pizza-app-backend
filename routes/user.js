@@ -8,7 +8,7 @@ const router = express.Router(); ///////
 router.route("/register").post(async (request, response) => {
   let success = false;
 
-  const { email, password } = request.body;
+  const { name, email, password } = request.body;
 
   const userFromDB = await getUserByEmail(email);
 
@@ -26,7 +26,7 @@ router.route("/register").post(async (request, response) => {
   } else {
     success = true;
     const hashedPassword = await genPassword(password);
-    const result = await createUser({ email, password: hashedPassword });
+    const result = await createUser({ name, email, password: hashedPassword });
     response.send({ success, result });
   }
 });
@@ -56,7 +56,5 @@ router.route("/signin").post(async (request, response) => {
     response.status(401).send({ success, message: "Invalid credentials" });
   }
 });
-
-
 
 export const userRouter = router;
