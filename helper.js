@@ -24,11 +24,11 @@ async function genPassword(password) {
   return hashedPassword;
 }
 
-async function getPizza(filter) {
+async function getPizza(data) {
   return await client
     .db("pizza_data")
     .collection("pizzalist")
-    .find(filter)
+    .find(data)
     .toArray();
 }
 
