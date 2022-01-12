@@ -4,7 +4,7 @@ import { auth } from "../middleware/auth.js";
 
 const router = express.Router(); ///////
 
-auth.router.route("/").get(async (request, response) => {
+router.route("/").get(auth, async (request, response) => {
   console.log(request.query);
   const data = request.query;
   const pizzaData = await getPizza(data);
