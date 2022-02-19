@@ -32,6 +32,9 @@ async function getPizza(data) {
     .toArray();
 }
 
+async function getDogs(data) {
+  return await client.db("Dogs").collection("dog_facts").find(data).toArray();
+}
 export {
   createUser,
   getUserByEmail,
@@ -39,4 +42,5 @@ export {
   getPizza,
   createAdmin,
   getAdminByEmail,
+  getDogs,
 };

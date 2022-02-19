@@ -5,6 +5,7 @@ import cors from "cors";
 import { userRouter } from "./routes/user.js";
 import { pizzalistRouter } from "./routes/pizzalist.js";
 import { adminRouter } from "./routes/admin.js";
+import { dogsRouter } from "./routes/dogs.js";
 
 dotenv.config();
 // console.log(process.env);
@@ -35,6 +36,7 @@ app.use("/user", userRouter);
 app.use("/admin", adminRouter);
 
 app.use("/pizzalist", pizzalistRouter);
+app.use("/dogs", dogsRouter);
 
 
 app.listen(PORT, () => console.log("App is started", PORT));
